@@ -1,0 +1,58 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="container-fluid">
+
+  <div class="text-center col-sm-12 col-md-6 col-lg-3 d-block mx-auto">
+    <img src="zestyeats1w.png" alt="logo" class="w-100" />
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <!-- Title -->
+    <div class="col-12">
+      <h1 class="display-6 text-center mt-4">Dashboard</h1>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow">
+      <h2 class="text-start">{{ totalMenu.length }}</h2>
+      <p class="lead text-start text-secondary">Total Menus  <i class="bi bi-card-checklist"></i></p>
+    </div>
+    
+
+    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow" *ngIf="users$ | async as users">
+      <h2 class="text-start">{{ users.length }}</h2>
+      <p class="lead text-start text-secondary">Total Users  <i class="bi bi-people-fill"></i></p>
+    </div>
+ 
+    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow">
+      <h2 class="text-start">{{ totalOrders }}</h2>
+      <p class="lead text-start text-secondary">Total Orders  <i class="bi bi-bag-check-fill"></i></p>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow">
+      <h2 class="text-start">{{ totalsales | currency: 'INR' }}</h2>
+      <p class="lead text-start text-secondary">Total Sales  <i class="bi bi-cash-stack"></i></p>
+    </div>
+  </div>
+
+  <div class="mt-5 px-5">
+    <h1 class="display-6 text-center mt-4">Users List</h1>
+   <div class="table-responsive">
+    <table class="table table-striped border">
+        <thead>
+          <tr>
+            <th>User Id</th>
+            <th> Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users$|async">
+              <td>{{user.uid}}</td>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+   </div>
+  </div>
+  </div>
+

@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h1 class="text-center display-4 my-4">Profile</h1>
+    <div class="text-center">
+    <div *ngIf="user?.photoURL; else noPhoto">
+      <img
+        [src]="user.photoURL"
+        alt="User profile picture"
+        class="img-fluid rounded-circle d-block mx-auto"
+        width="150px"
+      />
+      <h3 class="text-center mt-4">{{ user.displayName }}</h3>
+      <p class="text-center">{{ user.email }}</p>
+    </div>
+
+    
+    <ng-template #noPhoto>
+      <img
+        src="user.jpg"
+        alt="Default user profile picture"
+        class="img-fluid rounded-circle d-block mx-auto"
+        width="150px"
+      />
+      <div *ngFor="let userData of euser | async">
+        <h3 class="text-center mt-4">{{ userData.name }}</h3>
+        <p class="text-center">{{ userData.email }}</p>
+      
+      </div>
+    </ng-template>
+    <p class="btn btn-light shadow" routerLink="/orders">Total orders: {{totalOrders}}</p>
+            <button
+              class="btn btn-dark d-block mx-auto mt-5"
+              (click)="logOut()"
+            >
+              LogOut <i class="bi bi-box-arrow-right"></i>
+            </button>
+
+      </div>
+ 
+       
+   
+</div>

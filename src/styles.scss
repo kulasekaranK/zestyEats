@@ -1,0 +1,9 @@
+$danger:#ff3131;
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+.custom-shadow {
+    filter: drop-shadow(0px 4px 6px rgba(212, 118, 118, 0.877)); 
+}
+.blur{
+    backdrop-filter: blur(30px);
+}

@@ -1,0 +1,46 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="container-fluid">
+ <h1 class="display-4 text-center mt-4">Orders History</h1>
+ <div class="row mt-4">
+    <div class="col-md-4 offset-md-4">
+      <select class="form-select" [(ngModel)]="selectedStatus" (change)="filterOrders()">
+        <option value="">All Statuses</option>
+        <option value="pending">Pending</option>
+        <option value="Delivered">Delivered</option>
+        <option value="Canceled">Canceled</option>
+      </select>
+    </div>
+  </div>
+<div class="table-responsive px-5">
+    <table class="table border border-secondary mt-5 table-hover">
+        <thead>
+            <tr class="table-dark">
+               <th>Order Id</th>
+               <th>Customer Id</th> 
+               <th>Date</th>
+               <th>Items</th>
+               <th>Quantity</th>
+               <th>Address</th>
+               <th>Status</th>
+               <th>Total</th>
+               
+            </tr>
+        </thead>
+        <tbody *ngFor="let order of orders$|async">
+            <tr *ngFor="let item of order.items">
+                <td>{{order.id}}</td>
+                <td>{{order.uid}}</td>
+                <td>{{item.date|date}}</td>
+                <td>{{item.name}} - {{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{order.address}}</td>
+                <td>{{item.status}}</td>
+                <td>{{item.price * item.quantity|currency:"INR"}}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</div>

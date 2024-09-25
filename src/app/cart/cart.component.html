@@ -1,0 +1,134 @@
+<app-navbar class="position-fixed top-0 end-0 w-100 mb-5" style="z-index: 2;"></app-navbar>
+
+<div class="container my-5 pt-5">
+  <!-- If cartItems exist, display the cart -->
+  <div class="row" *ngIf="(cartItems$ | async)?.length > 0; else empty">
+    <div class="col-lg-8">
+      <div class="address mx-auto border shadow rounded-4 p-4 d-flex flex-column justify-content-center">
+        <h3 class="ms-2 my-3">Select Delivery Address</h3>
+        <!-- User Address -->
+        <div class="col-md-6" *ngIf="address; else addAddressTemplate">
+          <div class="border p-3 rounded">
+            <h5 class="mb-3">Your Address</h5>
+            <p class="fs-6">{{ address }}</p>
+            <button class="btn btn-danger text-white btn-sm" *ngIf="dlvBtn" (click)="showPayment()">Deliver Here</button>
+            <button class="btn btn-secondary btn-sm ms-2" *ngIf="dlvBtn" data-bs-toggle="modal" data-bs-target="#modal">Edit</button>
+          </div>
+        </div>
+
+        <!-- Add Address Template (Fallback) -->
+        <ng-template #addAddressTemplate>
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="text-muted mb-0">You have not added an address yet.</p>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
+              <i class="bi bi-plus-circle"></i> Add Address
+            </button>
+          </div>
+        </ng-template>
+
+          <!-- Modal for Adding Address -->
+          <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delivery Address</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form #f="ngForm">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="bi-door-open"></i></span>
+                      <input type="text" class="form-control" name="doorno" id="doorno" [(ngModel)]="doorNo" ngModel required placeholder="Door No, Street">
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="bi bi-geo-alt"></i> </span>
+                      <input type="text" class="form-control" name="city" id="city" [(ngModel)]="city" ngModel required placeholder="City">
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"><i class="bi bi-map"></i></span>
+                      <input type="text" class="form-control" name="landmark" id="landmark" [(ngModel)]="landmark" ngModel required placeholder="Landmark">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger text-white" [disabled]="f.invalid" (click)="addAddress()" data-bs-dismiss="modal">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+      </div>
+
+      <!-- Payment Section -->
+      <div class="payment mt-4 mx-auto border shadow rounded-4 p-4 mb-3" *ngIf="Showpayment">
+        <h3>Choose Payment Method</h3>
+        <button class="btn btn-warning mt-3" (click)="payWithRazorpay()">Proceed To Pay</button>
+      </div>
+    </div>
+
+    <!-- Cart Items Section -->
+    <div class="col-lg-4">
+      <div class="card p-4 rounded-4 shadow overflow-auto" style="max-height: 80vh;">
+        <h6 class="mb-4 text-center text-md-start">Cart</h6>
+        <div class="card-body">
+          <div *ngFor="let cartItem of (cartItems$ | async)" class="mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <img [src]="cartItem.image" class="img-fluid rounded-4 me-3" width="50px" alt="foodImage" />
+              <p class="mb-1">{{ cartItem.name }}</p>
+              <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-light" (click)="increase(cartItem.id)">+</button>
+                <p class="mb-1">{{ cartItem.quantity }}</p>
+                <button class="btn btn-light" (click)="decrease(cartItem.id)">-</button>
+              </div>
+              <p class="fw-bold mb-1">{{ cartItem.price * cartItem.quantity | currency: 'INR' }}</p>
+              <button class="btn btn-light" (click)="removeItem(cartItem.id)">
+                <i class="bi bi-x-circle"></i>
+              </button>
+            </div>
+            <hr />
+          </div>
+        </div>
+
+        <!-- Bill Summary -->
+        <div class="border p-4 rounded-3 shadow mt-4">
+          <h5 class="fw-bold mb-3">Bill Summary</h5>
+          <div class="d-flex justify-content-between">
+            <span class="text-secondary">Total Items</span>
+            <span class="text-secondary">{{ (cartItems$ | async)?.length }}</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="text-secondary">Item Total</span>
+            <span class="text-secondary">{{ Subtotal | currency: 'INR' }}</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="text-secondary">Delivery Fee</span>
+            <span class="text-secondary">{{49 | currency: 'INR'}}</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="text-secondary">Packaging Fee</span>
+            <span class="text-secondary">{{20 | currency: 'INR'}}</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="text-secondary">GST (5%)</span>
+            <span class="text-secondary">{{20 | currency: 'INR'}}</span>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-between fw-bold">
+            <span>Total to Pay</span>
+            <span>{{ totalAmount | currency: 'INR' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty Cart Template -->
+  <ng-template #empty>
+    <div class="text-center">
+      <img src="emptyCart.png" width="300" alt="Empty Cart" />
+      <p class="lead">Your cart is empty</p>
+      <p class="fw-lighter">You can go to the menu page to view more foods</p>
+      <button routerLink="/menu" class="btn btn-danger text-white">See Menu</button>
+    </div>
+  </ng-template>
+</div>

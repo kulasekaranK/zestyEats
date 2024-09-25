@@ -1,0 +1,29 @@
+/* _themes.scss */
+$light-theme: (
+  body-bg: #ffffff,
+  body-color: #000000,
+  primary: #0d6efd, /* Bootstrap primary color */
+  secondary: #6c757d,
+  danger:#ff3131,
+);
+
+$dark-theme: (
+  body-bg: #250000,
+  body-color: #ffffff,
+  primary: #bb86fc, /* Adjust your dark mode primary color */
+  secondary: #03dac6,
+  danger:#690000
+);
+@mixin apply-theme($theme) {
+    background-color: map-get($theme, body-bg);
+    color: map-get($theme, body-color);
+    .btn-primary {
+      background-color: map-get($theme, primary);
+      border-color: map-get($theme, primary);
+    }
+    .btn-secondary {
+      background-color: map-get($theme, secondary);
+      border-color: map-get($theme, secondary);
+    }
+  }
+  

@@ -1,0 +1,55 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="container-fluid">
+  <h1 class="display-4 text-center mt-4">New Orders</h1>
+  <div class="table-responsive px-5">
+    <table class="table border border-secondary mt-5 table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th>Order ID</th>
+          <th>Customer ID</th>
+          <th>Date</th>
+          <th>Items</th>
+          <th>Quantity</th>
+          <th>Address</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="orders$ | async as orders">
+        <ng-container *ngFor="let order of orders">
+          <ng-container *ngFor="let item of order.items">
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>{{ order.uid }}</td>
+              <td>{{ item.date?.toDate() | date: 'short' }}</td>
+              <td>{{ item.name }} - {{ item.price | currency: 'INR' }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{order.address}}</td>
+              <td>{{ item.price * item.quantity | currency: 'INR' }}</td>
+              <td>
+                <div class="d-flex justify-content-around gap-2">
+                  <button
+                    class="btn btn-success text-light btn-sm"
+                    (click)="markDelivered(order.id, item.id)"
+                  >
+                    Order Fulfilled
+                    <i class="bi bi-check-circle-fill"></i>
+                  </button>
+                  <button
+                    class="btn btn-danger text-light btn-sm"
+                    (click)="markCancel(order.id, item.id)"
+                  >
+                    Reject Order
+                    <i class="bi bi-x-circle-fill"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+
+    
+    </table>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 {
   "type": "service_account",
   "project_id": "zesty-eats",
-  "private_key_id": "4fe462ac738dfa6abb526dd2536a03baadbf25b3",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCkjIWelZ9qeQ5D\n2Ma+UyCX07rhtFuVtQXJFl0pxNjLiTJN44MQNW92ZKNeijTLx93XyCOp0xEYrAic\n6qjyhlJ9XUIlFhKAnwsuO+KY2WNElxXIyW4UM4VEqti52ke85d89BJDSEoXgA9fm\naHwC6/lXnOH+uDzODE0GmZIAVATQnZ6o4pW1Y5SHA/DVpgewK1eg4LskpMX7UXTM\ngUz7VmzUnptOSMRGq+h6iIL+f33r9zA8aKc/FS+dDASjr3tO0W+fOaQzqShAWIn1\nor0xRge4NUJFXpx8gpGIW7LrYVvpJKHJfRlwFnZngAMBgZ0Ul7AN7EKiuglUaROP\nOgp7GkZHAgMBAAECgf9WQWlwslcQqzf2Ct58rpw1JtjKS0DurftU13T+ok0vLMyx\nz/sLGlvejQQLTZPk+8+Lwk1e30rwAowR+D5J2FdEBwiUn+GNf7s1s0Ti/DLmK1fs\nijAOGPO9f/3kCo3IAqGOHY48Cv84tveRtGAsBoaojY7e25Of/9K5vsa5Q+2E/aZs\nK3aW5g6QwtIqV7Hcy5A8hqpXEyJ3nyu+C1Fyg7Saq6YvPFR/0xVI1bC+6NT+qKCE\nNkwmeRBOja3yEoBX0EIL24TRAAOrwW9ifAJr7DDdM3HmyK1BYetzOYVsGkDZ2bZ6\n0g0VJyCtz0JXgPj4NpgN+7o2Uxgjo6lCKjmQ5ykCgYEA5q6F/7gaK1O041/X/i7i\nVfotElsW+mNl3k+cK+sceC//6QeNvpBTv97tzNNzRRWJngj+sWlUhI/70QFPEy2N\nSB+RzSXmnIP4q0KNSkbzErgPBzqTIrgcSPuRFrDB4rBpCG2HqZiKiQ8WuhUyb8VU\nuZ7Lcyar3VRtNuC6XTyKPMkCgYEAtpvcfiWR1I3a/BmNRwerjux+Ga155VmD2rfJ\nxG75l3Bass07rcKoFOiQrpdi9I0/4vvcB07UX5RTSUixQHq9jeiwQkGQBn7Qd/UN\nO3DRxJijDJtMl1gMH5B0p4TeYbabQSSID4Yfk8Hd+kuwPchqvIb+DxnrP88kQyTb\nUVxCwo8CgYAohU+Uc8plAfcsWZGfXKz1XVS9fLK0mPEz89gC/vGpSwUw8dq8Nq3/\nbjFnYV1GLVpXIE1c7JukDYa2V/yD6eR/XsxFtPqlU6lCrBYVjhD0oNBC/M8LsjuF\ntmruCW6FW2eXy2WhLOJo4PWlCkQpzgfr8zDZsVlPL51fnmoeJpxBwQKBgHlakSig\nDQ7lis8YqAO5PDDKR28HE0fwuiiDFSpe2a3jc9L5gxyRjSP//g6Y+qEssXVGDU4p\n/AbcypCcJ3eDWi9RoLkXWwCGDEJ77uQ+sJjnGwxItJirYbskQ/ID4cmsEfczsNwo\nNRn7r2okHKaiZxSM3Y/pmKYaIa4hc0LZfmBPAoGBALBrhES8fAsa+nekrVHOmsdO\n4Kgqm81cmKqbsKEApg5R9GxJ5PQNUQYhha7YS8FiKDaJXC85RopEv8ZwrQJcg9EW\n/E/Q5w4AxX6BTEBIWDnBifvthVrp/VgKpbxLQcSJuM1SxCRl08AHFiQ/ZSp7HCdD\ncZT793l7su3WlghQhvvT\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-6mi9x@zesty-eats.iam.gserviceaccount.com",
-  "client_id": "109301027824817091905",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6mi9x%40zesty-eats.iam.gserviceaccount.com",
+  "client_x509_cert_url": "",
   "universe_domain": "googleapis.com"
 }

@@ -14,6 +14,6 @@ async function setCustomClaim(uid, role) {
   }
 }
 
-const uid = "PjCVKqFpkrQTlA42stXOgFmh7aZ2";
+const uid = "";
 const role = "user";
 setCustomClaim(uid, role);

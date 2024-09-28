@@ -53,7 +53,7 @@ export class HomeComponent {
 
   requestPermission() {
     getToken(this.messaging, {
-      vapidKey: 'BGvic8d4fcU4AzZbVs7tSAatloq2wKclUA8N6KNG5-G4d3IRxZyRtnmKeE9hauYNpUGl8OHTfOrbBoNy6Gv_SSU'
+      vapidKey: ''
     })
     .then((currentToken) => {
       if (currentToken) {

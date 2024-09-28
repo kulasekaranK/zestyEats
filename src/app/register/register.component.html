@@ -1,54 +1,126 @@
-<div class="container-fluid vh-100  bg-danger pt-5">
-
- 
-    <div class="container d-flex flex-column align-items-center ">
-        <div class="alert alert-danger" *ngIf="message">
-            {{message}}
-            <button class="btn-close" data-bs-dismiss="alert"></button>
-
-        </div>
-     <form class=" col-sm-12 col-md-8 col-lg-4 p-3 px-5 rounded-4 bg-light" (ngSubmit)="register()">
-         <img src="zestyeats1w.png" alt="" class="d-block mx-auto w-75 mb-2" />
-         <h2 class="text-center  fst-italic">Register</h2>
-         <div class="input-group mb-4">
-       <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-          <input class="form-control" type="text" name="name" id="name" [(ngModel)]="name" placeholder="Name"/>
-        </div>
-         <div class="input-group mb-4">
-      <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-           <input class="form-control" type="text" name="email" id="email" [(ngModel)]="email" placeholder="Email"/>
-         </div>
-         <div class="input-group mb-4">
-      <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
-           <input
-             class="form-control"
-             [type]="isPasswordVisible ? 'text' : 'password'"
-             name="Password"
-             id="Password"
-             [(ngModel)]="password"
-             placeholder="Password"
-           />
-           <button class="btn border" type="button" (click)="togglePasswordVisibility()"><i [ngClass]="isPasswordVisible ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"></i></button>
-
-         </div>
-         <div class="input-group mb-4">
-          <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
-          <textarea
-            class="form-control"
-          placeholder="Address"
-            name="address"
-            id="address"
-            [(ngModel)]="address"
-          ></textarea>
-
-        </div>
-         <button class="btn btn-danger  d-block mx-auto text-white mt-4">
-           Register
-         </button>
-         <p class="text-center mt-4">Already have account ? <a routerLink="/login" class="text-decoration-none text-danger">Login</a></p>
-         
-       </form>
+<div class="container-fluid vh-100 bg-danger pt-5">
+  <div class="container d-flex flex-column align-items-center">
+    <div class="alert alert-danger" *ngIf="message">
+      {{ message }}
+  
     </div>
-   </div>
- 
- 
+
+    <form
+      class="col-sm-12 col-md-8 col-lg-4 p-3 px-5 rounded-4 bg-light"
+      (ngSubmit)="register()" #f="ngForm"
+    >
+      <img src="zestyeats1w.png" alt="" class="d-block mx-auto w-75 mb-2" />
+      <h2 class="text-center fst-italic">Register</h2>
+      <div class="input-group mb-1 mt-3">
+        <span class="input-group-text">
+          <i class="bi bi-person-fill"></i>
+        </span>
+        <input
+          class="form-control"
+          type="text"
+          name="name"
+          id="name"
+          [(ngModel)]="name"
+          placeholder="Name"
+          pattern="^[a-zA-Z ]*$"
+          #namev="ngModel"
+          required
+         [ngClass]="{'is-invalid':namev.touched && namev.invalid}"
+        />
+      </div>
+      <div *ngIf="namev.touched && namev.invalid" class="ms-5 text-danger">
+        <small *ngIf="namev.errors?.['required']">Name is required!</small>
+        <small *ngIf="namev.errors?.['pattern']"
+          >Invalid name. Only alphabets allowed.</small
+        >
+      </div>
+
+      <div class="input-group mb-1 mt-3">
+        <span class="input-group-text">
+          <i class="bi bi-envelope-fill"></i>
+        </span>
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          id="email"
+          [(ngModel)]="email"
+          placeholder="Email"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+          required
+          #emailv="ngModel"
+          [ngClass]="{'is-invalid':emailv.touched && emailv.invalid,'is-valid':! emailv.invalid}"
+        />
+      </div>
+      <div *ngIf="emailv.touched && emailv.invalid" class="ms-5 text-danger">
+        <small *ngIf="emailv.errors?.['required']"> Email is required!</small>
+        <small *ngIf="emailv.errors?.['pattern']">Enter valid email!</small>
+      </div>
+
+      <div class="input-group mb-1 mt-3">
+        <span class="input-group-text">
+          <i class="bi bi-key-fill"></i>
+        </span>
+        <input
+          class="form-control"
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          name="password"
+          id="password"
+          [(ngModel)]="password"
+          placeholder="Password"
+          required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          #passwordv="ngModel"
+          [ngClass]="{'is-invalid':passwordv.touched && passwordv.invalid,'is-valid':! passwordv.invalid}"
+        />
+        <button
+          class="btn border"
+          type="button"
+          (click)="togglePasswordVisibility()"
+        >
+          <i
+            [ngClass]="
+              isPasswordVisible ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'
+            "
+          ></i>
+        </button>
+      </div>
+      <div *ngIf="passwordv.touched && passwordv.invalid" class="ms-5 text-danger">
+        <small *ngIf="passwordv.errors?.['required']"
+          >Password is required!</small
+        >
+        <small *ngIf="passwordv.errors?.['pattern']">password must be at least 8 characters long, with uppercase,lowercase, digits.</small>
+      </div>
+
+      <div class="input-group mb-1 mt-3">
+        <span class="input-group-text">
+          <i class="bi bi-geo-alt-fill"></i>
+        </span>
+        <textarea
+          class="form-control"
+          placeholder="Address"
+          name="address"
+          id="address"
+          [(ngModel)]="address"
+          required
+          #addressv = "ngModel"
+          [ngClass]="{'is-invalid':addressv.touched && addressv.invalid}"
+        ></textarea>
+      </div>
+      <div *ngIf="addressv.touched && addressv.invalid" class="ms-5 text-danger">
+        <small *ngIf="addressv.errors?.['required']">Address is required!</small>
+      </div>
+
+      <button class="btn btn-danger d-block mx-auto text-white mt-4" type="submit" [disabled]="f.invalid">
+        Register
+      </button>
+
+      <p class="text-center mt-4">
+        Already have an account?
+        <a routerLink="/login" class="text-decoration-none text-danger">
+          Login
+        </a>
+      </p>
+    </form>
+  </div>
+</div>

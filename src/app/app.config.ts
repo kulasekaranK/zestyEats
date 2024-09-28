@@ -12,13 +12,13 @@ import { provideMessaging} from '@angular/fire/messaging';
 import { getMessaging } from 'firebase/messaging';
 
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: "AIzaSyDm4uUkwNeXXpkwFRQgj9I6NG6ayxKw9Jo",
   authDomain: "zesty-eats.firebaseapp.com",
   projectId: "zesty-eats",
   storageBucket: "zesty-eats.appspot.com",
-  messagingSenderId: "",
-  appId: "",
-  measurementId: ""
+  messagingSenderId: "984457752458",
+  appId: "1:984457752458:web:7c621293c11ddaa81e6273",
+  measurementId: "G-5WCLQ0527R"
 };
 
 export const appConfig: ApplicationConfig = {

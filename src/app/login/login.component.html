@@ -1,43 +1,98 @@
-<div class="container-fluid vh-100  bg-danger pt-5">
+<div class="container-fluid vh-100 bg-danger pt-5">
+  <div class="container d-flex flex-column align-items-center">
+    <div class="alert alert-danger" *ngIf="message">
+      {{ message }}
+    </div>
+    <form
+      class="col-sm-12 col-md-8 col-lg-4 p-3 px-5 rounded-4 bg-light"
+      (ngSubmit)="login()"
+    >
+      <img src="zestyeats1w.png" alt="" class="d-block mx-auto w-75 mb-2" />
+      <h2 class="text-center fst-italic">Login</h2>
 
- 
-   <div class="container d-flex flex-column align-items-center">
-     <div class="alert alert-danger" *ngIf="message">
-        {{message}}
-     </div>
-    <form class=" col-sm-12 col-md-8 col-lg-4 p-3 px-5 rounded-4 bg-light" (ngSubmit)="login()">
-        <img src="zestyeats1w.png" alt="" class="d-block mx-auto w-75 mb-2" />
-        <h2 class="text-center  fst-italic">Login</h2>
+      <div class="input-group mb-1 mt-3 ">
+        <span class="input-group-text"
+          ><i class="bi bi-envelope-fill"></i
+        ></span>
+        <input
+          class="form-control"
+          type="text"
+          name="email"
+          id="email"
+          [(ngModel)]="email"
+          placeholder="email"
+          required
+          #emailv="ngModel"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+        />
+      </div>
+      <div *ngIf="emailv.touched && emailv.invalid" class="ms-5 text-danger">
+        <small *ngIf="emailv.errors?.['required']">Email is required!</small>
+        <small *ngIf="emailv.errors?.['pattern']">Enter valid email!</small>
+      </div>
 
-        <div class="input-group mb-3">
-       
-          <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-          <input class="form-control" type="text" name="email" id="email" [(ngModel)]="email" placeholder="email"/>
-        </div>
-
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
-          <input class="form-control" 
-                 [type]="isPasswordVisible ? 'text' : 'password'"
-                 name="Password"
-                 id="Password"
-                 [(ngModel)]="password"
-                 placeholder="Password" />
-          <button class="btn border" type="button" (click)="togglePasswordVisibility()">
-            <i [ngClass]="isPasswordVisible ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"></i>
-          </button>
-        </div>
-        
-
-        <a routerLink="/reset-password" class="text-secondary ms-2"> Forget Password?</a>
-        <button class="btn btn-danger  d-block mx-auto text-white mt-4" type="submit">
-          Login
+      <div class="input-group mb-1 mt-3">
+        <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+        <input
+          class="form-control"
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          name="Password"
+          id="Password"
+          [(ngModel)]="password"
+          placeholder="Password"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          #passwordv="ngModel"
+          required
+        />
+        <button
+          class="btn border"
+          type="button"
+          (click)="togglePasswordVisibility()"
+        >
+          <i
+            [ngClass]="
+              isPasswordVisible ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'
+            "
+          ></i>
         </button>
-        <p class="text-center mt-4">New to zestyEats? <a routerLink="/register" class="text-decoration-none text-danger">Register</a></p>
-        <p class="text-center">Or</p>
-        <button class="btn btn-white rounted-pill shadow w-75 d-block mx-auto mb-3" (click)="google()" type="button">Continue with <img src="google.png" width="30px" alt=""></button>
-        <button class="btn btn-white rounted-pill shadow w-75 d-block mx-auto d-flex align-items-center justify-content-center" type="button" (click)="facebook()">Continue with <img src="facebook.svg" class="ms-2" width="20px" alt=""></button>
-      </form>
-   </div>
-  </div>
+      </div>
+      <div *ngIf="passwordv.touched && passwordv.invalid" class="ms-5 text-danger">
+        <small *ngIf="passwordv.errors?.['required']">Password is required!</small>
+        <small *ngIf="passwordv.errors?.['pattern']">Password must be at least 8 characters, with uppercase, lowercase, digits.</small>
+      </div>
 
+      <a routerLink="/reset-password" class="text-secondary ms-2">
+        Forget Password?</a
+      >
+    
+      <button
+        class="btn btn-danger d-block mx-auto text-white mt-4"
+        type="submit"
+      >
+        Login
+      </button>
+      <p class="text-center mt-4">
+        New to zestyEats?
+        <a routerLink="/register" class="text-decoration-none text-danger"
+          >Register</a
+        >
+      </p>
+      <p class="text-center">Or</p>
+      <button
+        class="btn btn-white rounted-pill shadow w-75 d-block mx-auto mb-3"
+        (click)="google()"
+        type="button"
+      >
+        Continue with <img src="google.png" width="30px" alt="" />
+      </button>
+      <button
+        class="btn btn-white rounted-pill shadow w-75 d-block mx-auto d-flex align-items-center justify-content-center"
+        type="button"
+        (click)="facebook()"
+      >
+        Continue with
+        <img src="facebook.svg" class="ms-2" width="20px" alt="" />
+      </button>
+    </form>
+  </div>
+</div>

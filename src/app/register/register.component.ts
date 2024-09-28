@@ -41,7 +41,10 @@ export class RegisterComponent {
     } catch(error) {
       console.log("error:",error);
       
-      this.message = 'Enter Valied Email and Password';
+      this.message = 'This email is already registered.';
+      setTimeout(()=>{
+        this.message =""
+      },5000)
     }
   }
   togglePasswordVisibility(){

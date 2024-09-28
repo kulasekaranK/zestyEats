@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { AuthService } from '../service/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { collection, Firestore, orderBy, query } from '@angular/fire/firestore';
@@ -20,9 +20,14 @@ import { getToken, Messaging } from '@angular/fire/messaging';
 export class HomeComponent {
   menuSubject = new BehaviorSubject<any[]>([]); 
   menu$ = this.menuSubject.asObservable();
+  categories:any;
 
-  constructor(private firestore: Firestore, private messaging:Messaging ) {
+  constructor(private firestore: Firestore, private messaging:Messaging, private router:Router ) {
     this.loadNew();
+    this.loadCategory();
+  }
+  goToMenuWithCategory(categoryName:any){
+    this.router.navigate(['/menu'],{queryParams:{category:categoryName}});
   }
 
   async loadNew() {
@@ -33,6 +38,12 @@ export class HomeComponent {
       this.menuSubject.next(snapshot.docs.map((doc) => doc.data()));
     });
   }
+  loadCategory(){
+    const collectionRef = collection(this.firestore, "categorys");
+    onSnapshot(collectionRef,(snapshot)=>{
+      this.categories = snapshot.docs.map(doc=>({id:doc.id, ...doc.data()}));
+    })
+  }
 
 
   ngOnInit() {
@@ -42,7 +53,7 @@ export class HomeComponent {
 
   requestPermission() {
     getToken(this.messaging, {
-      vapidKey: ''
+      vapidKey: 'BGvic8d4fcU4AzZbVs7tSAatloq2wKclUA8N6KNG5-G4d3IRxZyRtnmKeE9hauYNpUGl8OHTfOrbBoNy6Gv_SSU'
     })
     .then((currentToken) => {
       if (currentToken) {

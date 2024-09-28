@@ -124,16 +124,23 @@ export class CartComponent {
     });
   }
   async addAddress() {
-    console.log(this.doorNo,this.city);
+    
+   try{
     const collectionRef = collection(this.firestore, 'users');
     const q = query(collectionRef, where('uid', '==', this.user));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.docs.length > 0) {
       const docRef = querySnapshot.docs[0].ref;
-
       const newAddress = `${this.doorNo}, ${this.city}, Landmark: ${this.landmark}`
       await updateDoc(docRef, { address: newAddress});
+      console.log("address added");
+      
     }
+   }
+   catch{
+    console.log("error");
+    
+   }
     this.loadAddress();
   }
   showPayment(){

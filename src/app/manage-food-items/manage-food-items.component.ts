@@ -10,10 +10,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { addDoc, collection, doc } from 'firebase/firestore';
+import { addDoc, collection, doc, FieldValue, serverTimestamp} from 'firebase/firestore';
 import { AuthService } from '../service/auth.service';
 import { AdminNavbarComponent } from '../admin-navbar/admin-navbar.component';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 
 
@@ -39,6 +39,9 @@ export class ManageFoodItemsComponent {
   menu$ = this.menuSubject.asObservable();
   selectedFile:File|null = null;
   foodImgLink:string ="";
+  newCategory='';
+  newCategoryimg='';
+  categorys:any;
 
   constructor(
     private fb: FormBuilder,
@@ -57,15 +60,33 @@ export class ManageFoodItemsComponent {
       isVegetarian: ['', Validators.required],
     });
     this.loadmenu();
+    this.loadCategory();
+  }
+  async addCatogery(){
+    const collectionRef = collection(this.firestore, "categorys");
+    await addDoc(collectionRef,{name:this.newCategory,url:this.newCategoryimg});
+    alert("New catogery added")
+  }
+  
+  async loadCategory(){
+    const collectionRef = collection(this.firestore, "categorys");
+    onSnapshot(collectionRef,(snapshot)=>{
+      this.categorys = snapshot.docs.map((doc)=>({id:doc.id, ...doc.data()}));
+      console.log(this.categorys);
+      
+    })
   }
   async addFood() {
     if (this.foodForm.valid) {
       try {
-        const foodItem = this.foodForm.value;
+        const foodItem ={ ...this.foodForm.value, createdAt: serverTimestamp(), 
+          isVegetarian: this.foodForm.value.isVegetarian === 'true',
+          available:true }
         const collectionRef = collection(this.firestore, 'foodItems');
         await addDoc(collectionRef, foodItem);
         alert('add successfuly');
         this.foodForm.reset();
+       
       } catch {
         console.error('error adding food item');
       }

@@ -11,14 +11,12 @@
     >
       <i class="bi bi-plus-lg"></i> Add Food Item
     </button>
+    
   </div>
 
   <div
     class="modal fade"
     id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
   >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -58,14 +56,22 @@
 
               <div class="form-group">
                 <label for="category">Category</label>
-                <input
+                <select
                   id="category"
-                  class="form-control"
+                  class="form-select"
                   formControlName="category"
                   type="text"
                   placeholder="Enter category"
-                />
+                >
+                <option *ngFor="let category of categorys" [value]="category.name">
+                  {{ category.name}}
+                </option>
+                
+                
+                </select>
+                <button class="btn btn-sm btn-danger text-light d-block mt-2 ms-auto" type="button" data-bs-toggle="modal" data-bs-target="#modal2">Add New Catogery</button>
               </div>
+
 
               <div class="form-group">
                 <label for="description">Description</label>
@@ -92,7 +98,7 @@
                 <label for="isVegetarian">Is Vegetarian</label>
                 <select
                   id="isVegetarian"
-                  class="form-control"
+                  class="form-select"
                   formControlName="isVegetarian"
                 >
                   <option value="true">Yes</option>
@@ -112,12 +118,38 @@
                   type="button"
                   class="btn btn-danger text-light"
                   type="submit"
+                  data-bs-dismiss="modal"
                 >
                   Add
                 </button>
               </div>
             </form>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="modal2">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Food Catogery</h1>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group mb-2">
+              <label for="category">Category</label>
+              <input type="text" name="catogery" class="form-control" id="catogery" [(ngModel)]="newCategory">
+            </div>
+            <div class="form-group">
+              <label for="catogeryimg">Category cover image url</label>
+              <input type="text" name="catogeryimg" class="form-control" id="catogeryimg" [(ngModel)]="newCategoryimg">
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary ms-2" type="button" data-bs-target="#exampleModal" data-bs-toggle="modal">Back</button>
+              <button class="btn btn-danger ms-2 text-white" type="button"  data-bs-target="#exampleModal" data-bs-toggle="modal" (click)="addCatogery()">Add Catogery</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -139,9 +171,8 @@
         <p class="text-danger fw-bolder">{{ menu.price | currency : "INR" }}</p>
         <p>{{ menu.description }}</p>
         <div class="d-flex align-items-center gap-3">
-          <p class="badge text-bg-warning mt-3">
-            {{ menu.isVegetarian === "true" ? "Veg" : "Non-Veg" }}
-          </p>
+         
+          <img [src]="menu.isVegetarian === true ? 'veg.svg' : 'non-veg.svg'" alt="label" width="30px" class="m">
           <button class="btn btn-light" (click)="edit(menu.id)">
             <i class="bi bi-pencil"></i> Edit
           </button>

@@ -8,11 +8,12 @@ import {
 import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
 import { AdminNavbarComponent } from '../admin-navbar/admin-navbar.component';
 import { BehaviorSubject } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, AdminNavbarComponent],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, AdminNavbarComponent,RouterLink],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })

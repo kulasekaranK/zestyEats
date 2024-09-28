@@ -1,35 +1,56 @@
 <app-navbar class="position-fixed top-0 end-0 w-100 mb-5" style="z-index: 2;"></app-navbar>
 <div class="container-fluid p-0">
- 
 
-    <section class="bg-danger text-white text-center py-5 mt-5">
-      <div class="container">
-        <h1 class="display-4">Welcome to ZestyEats!</h1>
-        <p class="lead">Your favorite meals delivered fresh to your doorstep.</p>
-        <button class="btn btn-light btn-lg mt-3" routerLink="/menu">Order Now</button>
-      </div>
-    </section>
-    <section></section>
-  
-  <section>
-    <div class="bg-white mb-5  ">
-      <h1 class="display-4 text-center my-5">Chef's Specials</h1>
-      <div class="d-flex flex-column flex-wrap flex-md-row flex-lg-row justify-content-center">
-        <div class="card col-sm-12 col-md-4 col-lg-2 m-3 p-3 rounded-4 shadow"*ngFor="let menu of menu$|async">
-          <img [src]="menu.image" alt="food img" class="card-img-top w-100 h-100 img-fluid rounded-4 shadow">
-                <div class="card-body">
-                    <h4>{{menu.name}}</h4>
-                   
-                  
-                    <div class="d-flex align-items-center justify-content-between gap-3">
-                    <p class="badge text-bg-warning mt-3">{{menu.isVegetarian === "true" ? "Veg": "Non-Veg"}}</p>
-                   <button class="btn text-light btn-danger" routerLink="/menu">Explore More</button>
-                    </div>
-                </div>
-        </div>
-     </div>
+  <section class="hero-section text-white text-center d-flex align-items-center justify-content-center" 
+    style="background-image: url('bg.jpg');
+           background-size: cover;
+           background-position: center;
+           min-height: 60vh;
+           position: relative;
+           overflow: hidden;
+           padding: 0;
+           margin: 0;
+           z-index: 1;">
+    
+    <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14, 0, 0, 0.575); z-index: 2;"></div>
+
+    <div class="container position-relative" style="z-index: 3;">
+      <h1 class="display-3 fw-bold mt-5">Welcome to ZestyEats!</h1>
+      <p class="lead">Delicious meals, delivered fresh and fast to your doorstep.</p>
+      <a href="/menu" class="btn btn-lg btn-danger text-white mt-4 px-5 py-3">Order Now</a>
     </div>
-      <app-footer></app-footer>
   </section>
+
+
+  <section>
+    <h1 class="display-6 text-center my-5">Eat What Makes You Happy</h1>
+    <div class="d-flex justify-content-center gap-4 flex-wrap my-4 w-100 overflow-auto">
+      <div *ngFor="let category of categories" class="text-center" (click)="goToMenuWithCategory(category.name)">
+        <img [src]="category.url" alt="category" class="rounded-circle shadow border border-dark" width="120" height="120">
+        <p >{{category.name}}</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-white mb-5">
+      <h1 class="display-4 text-center my-5">Chef's Specials</h1>
+      <div class="d-flex flex-column flex-md-row justify-content-center flex-wrap">
+        <div class="card col-sm-12 col-md-5 col-lg-2 m-3 p-3 rounded-4 shadow" *ngFor="let menu of menu$ | async">
+          <img [src]="menu.image" alt="food img" class="card-img-top w-100 h-100 img-fluid rounded-4 shadow">
+          <div class="card-body">
+            <h4 class="card-title">{{menu.name}}</h4>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="p-1 bg-light rounded shadow">
+                <img [src]="menu.isVegetarian === true ? 'veg.svg' : 'non-veg.svg'" alt="label" width="17px" >
+               </div>
+              <button class="btn text-light btn-danger" routerLink="/menu">Explore More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
 </div>
-  

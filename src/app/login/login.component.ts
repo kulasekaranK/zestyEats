@@ -24,6 +24,9 @@ export class LoginComponent {
        
     }).catch(()=>{
       this.message="Please Enter Valied Email and Password!"
+      setTimeout(()=>{
+        this.message =""
+      },5000)
     })
   }
 
@@ -44,6 +47,9 @@ export class LoginComponent {
   }
   catch{
    this.message =" error during google login!"
+   setTimeout(()=>{
+    this.message =""
+  },5000)
   }
     
   }
@@ -64,6 +70,9 @@ export class LoginComponent {
     }
     catch{
      this.message =" error during facebook login!"
+     setTimeout(()=>{
+      this.message =""
+    },5000)
     }
       
     }

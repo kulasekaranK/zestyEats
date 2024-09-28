@@ -6,23 +6,23 @@
   </div>
 
   <div class="row d-flex justify-content-center">
-    <!-- Title -->
+
     <div class="col-12">
       <h1 class="display-6 text-center mt-4">Dashboard</h1>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow">
+    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow" routerLink="/manage-food-items">
       <h2 class="text-start">{{ totalMenu.length }}</h2>
-      <p class="lead text-start text-secondary">Total Menus  <i class="bi bi-card-checklist"></i></p>
+      <p class="lead text-start text-secondary ">Total Menus  <i class="bi bi-card-checklist"></i></p>
     </div>
     
 
-    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow" *ngIf="users$ | async as users">
+    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow"  *ngIf="users$ | async as users">
       <h2 class="text-start">{{ users.length }}</h2>
       <p class="lead text-start text-secondary">Total Users  <i class="bi bi-people-fill"></i></p>
     </div>
  
-    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow">
+    <div class="col-12 col-md-6 col-lg-2 m-3 bg-light px-4 pt-3 mt-4 rounded-4 shadow" routerLink="order-history">
       <h2 class="text-start">{{ totalOrders }}</h2>
       <p class="lead text-start text-secondary">Total Orders  <i class="bi bi-bag-check-fill"></i></p>
     </div>
